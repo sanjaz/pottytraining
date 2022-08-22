@@ -6,6 +6,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     env_file: db.env
+    restart: always
   potty_web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -16,6 +17,7 @@ services:
     env_file:
       - db.env
       - app.env
+    restart: always
     depends_on:
       - potty_db
 

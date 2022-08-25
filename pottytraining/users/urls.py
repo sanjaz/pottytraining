@@ -2,7 +2,8 @@ from django.urls import include, path
 from rest_framework import routers
 
 from pottytraining.users.views import (
-    AdminViewSet, ParentViewSet, TeacherViewSet, UserViewSet
+    AdminViewSet, ParentViewSet, TeacherViewSet, UserViewSet,
+    user_create
 )
 
 
@@ -15,5 +16,6 @@ router.register(r'parents', ParentViewSet, basename="parents")
 
 
 urlpatterns = [
+    path('users/create/', user_create, name="create_user"),
     path('', include(router.urls)),
 ]

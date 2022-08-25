@@ -1,7 +1,5 @@
 from django.contrib.auth.models import User
-from rest_framework import generics, permissions, status, viewsets
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.response import Response
+from rest_framework import generics, permissions, viewsets
 
 from pottytraining.users.serializers import (
     CreateUserSerializer,
@@ -10,7 +8,17 @@ from pottytraining.users.serializers import (
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+
+    serializers = {
+        'default': UserSerializer,
+        'create': CreateUserSerializer,
+    }
+
+    def get_serializer_class(self):
+        return self.serializers.get(
+            self.action,
+            self.serializers['default']
+        )
 
 
 class AdminViewSet(UserViewSet):

@@ -11,26 +11,39 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-            "url", "username", "email", "first_name", "last_name", "groups",
+            "url",
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+            "groups",
         ]
 
 
 class CreateUserSerializer(serializers.ModelSerializer):
+    groups = serializers.PrimaryKeyRelatedField(
+        queryset=Group.objects.all(), many=True
+    )
+
     class Meta:
         model = User
         fields = (
+            "id",
             "username",
             "email",
             "password",
             "first_name",
             "last_name",
-            "id",
+            "groups",
         )
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
         password = validated_data.pop("password")
+        groups = validated_data.pop("groups")
         user = User.objects.create_user(**validated_data)
         user.set_password(password)
         user.save()
+        for group in groups:
+            user.groups.add(group)
         return user

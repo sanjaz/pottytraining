@@ -1,22 +1,17 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 from rest_framework import serializers
 
 
 # Define the API representation of User.
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    groups = serializers.SlugRelatedField(
-        many=True, read_only=True, slug_field="name"
+class UserSerializer(serializers.ModelSerializer):
+    groups = serializers.PrimaryKeyRelatedField(
+        queryset=Group.objects.all(), many=True
     )
 
     class Meta:
         model = User
         fields = [
-            "url",
-            "username",
-            "email",
-            "first_name",
-            "last_name",
-            "groups",
+            "url", "username", "email", "first_name", "last_name", "groups",
         ]
 
 

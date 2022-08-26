@@ -2,9 +2,14 @@ from django.contrib.auth.models import Group, User
 from rest_framework import serializers
 
 
+class GroupPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
+    def to_representation(self, instance):
+        return instance.name
+
+
 # Define the API representation of User.
 class UserSerializer(serializers.ModelSerializer):
-    groups = serializers.PrimaryKeyRelatedField(
+    groups = GroupPrimaryKeyRelatedField(
         queryset=Group.objects.all(), many=True
     )
 

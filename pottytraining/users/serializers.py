@@ -1,4 +1,5 @@
-from django.contrib.auth.models import Group, User
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
 from rest_framework import serializers
 
 
@@ -9,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        model = User
+        model = get_user_model()
         fields = [
             "url",
             "username",
@@ -26,7 +27,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        model = User
+        model = get_user_model()
         fields = (
             "id",
             "username",
@@ -41,7 +42,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         password = validated_data.pop("password")
         groups = validated_data.pop("groups")
-        user = User.objects.create_user(**validated_data)
+        user = get_user_model().objects.create_user(**validated_data)
         user.set_password(password)
         user.save()
         for group in groups:

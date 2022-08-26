@@ -8,10 +8,10 @@ from pottytraining.users.serializers import CreateUserSerializer, UserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = get_user_model().objects.all()
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = UserFilter
     group_name = None
+    queryset = get_user_model().objects.none()
 
     serializers = {
         "default": UserSerializer,
@@ -20,6 +20,14 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         return self.serializers.get(self.action, self.serializers["default"])
+
+    def get_queryset(self):
+        if self.group_name is None:
+            return get_user_model().objects.all()
+        else:
+            return get_user_model().objects.filter(
+                groups__name=self.group_name
+            )
 
     def perform_create(self, serializer):
         if self.group_name is None:
@@ -32,17 +40,14 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class AdminViewSet(UserViewSet):
-    queryset = get_user_model().objects.filter(groups__name="Admins")
     group_name = "Admins"
 
 
 class TeacherViewSet(UserViewSet):
-    queryset = get_user_model().objects.filter(groups__name="Teachers")
     group_name = "Teachers"
 
 
 class ParentViewSet(UserViewSet):
-    queryset = get_user_model().objects.filter(groups__name="Parents")
     group_name = "Parents"
 
 

@@ -3,10 +3,7 @@ from django_filters import rest_framework as filters
 from rest_framework import generics, permissions, viewsets
 
 from pottytraining.users.filters import UserFilter
-from pottytraining.users.serializers import (
-    CreateUserSerializer,
-    UserSerializer
-)
+from pottytraining.users.serializers import CreateUserSerializer, UserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -15,15 +12,12 @@ class UserViewSet(viewsets.ModelViewSet):
     filterset_class = UserFilter
 
     serializers = {
-        'default': UserSerializer,
-        'create': CreateUserSerializer,
+        "default": UserSerializer,
+        "create": CreateUserSerializer,
     }
 
     def get_serializer_class(self):
-        return self.serializers.get(
-            self.action,
-            self.serializers['default']
-        )
+        return self.serializers.get(self.action, self.serializers["default"])
 
 
 class AdminViewSet(UserViewSet):

@@ -35,5 +35,4 @@ class ParentViewSet(UserViewSet):
 
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
-    permission_classes = (permissions.AllowAny,)
     serializer_class = CreateUserSerializer

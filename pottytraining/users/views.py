@@ -26,6 +26,11 @@ class UserViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         return self.serializers.get(self.action, self.serializers["default"])
 
+    def get_serializer_context(self):
+        context = super(UserViewSet, self).get_serializer_context()
+        context.update({"group_name": self.group_name})
+        return context
+
     def get_queryset(self):
         if self.group_name is None:
             return get_user_model().objects.all()
@@ -33,15 +38,6 @@ class UserViewSet(viewsets.ModelViewSet):
             return get_user_model().objects.filter(
                 groups__name=self.group_name
             )
-
-    def perform_create(self, serializer):
-        if self.group_name is None:
-            serializer.save()
-        else:
-            # TODO: validate group name
-            user = serializer.save()
-            group = Group.objects.get(name=self.group_name)
-            group.user_set.add(user)
 
 
 class AdminViewSet(UserViewSet):

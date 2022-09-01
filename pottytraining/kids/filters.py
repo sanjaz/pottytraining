@@ -15,4 +15,4 @@ class KidFilter(filters.FilterSet):
 
     class Meta:
         model = Kid
-        fields = ["first_name", "last_name", "teacher"]
+        fields = ["first_name", "last_name", "gender", "teacher"]

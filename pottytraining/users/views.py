@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group
 from django_filters import rest_framework as filters
 from rest_framework import generics, viewsets
 

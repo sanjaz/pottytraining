@@ -42,7 +42,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         password = validated_data.pop("password")
         groups = validated_data.pop("groups")
-        group_name = self.context.get('group_name')
+        group_name = self.context.get("group_name")
         if group_name:
             groups = Group.objects.filter(name=group_name)
         user = get_user_model().objects.create_user(**validated_data)

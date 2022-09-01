@@ -18,4 +18,4 @@ class Kid(models.Model):
     guardians = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
     class Meta:
-        ordering = ['last_name', 'first_name']
+        ordering = ["last_name", "first_name"]

@@ -14,19 +14,35 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Kid',
+            name="Kid",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(max_length=100)),
-                ('last_name', models.CharField(max_length=100)),
-                ('gender', models.IntegerField(choices=[(0, 'Not known'), (1, 'Male'), (2, 'Female')])),
-                ('birth_date', models.DateField(null=True)),
-                ('start_date', models.DateField(null=True)),
-                ('end_date', models.DateField(null=True)),
-                ('guardians', models.ManyToManyField(to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("first_name", models.CharField(max_length=100)),
+                ("last_name", models.CharField(max_length=100)),
+                (
+                    "gender",
+                    models.IntegerField(
+                        choices=[(0, "Not known"), (1, "Male"), (2, "Female")]
+                    ),
+                ),
+                ("birth_date", models.DateField(null=True)),
+                ("start_date", models.DateField(null=True)),
+                ("end_date", models.DateField(null=True)),
+                (
+                    "guardians",
+                    models.ManyToManyField(to=settings.AUTH_USER_MODEL),
+                ),
             ],
             options={
-                'ordering': ['last_name', 'first_name'],
+                "ordering": ["last_name", "first_name"],
             },
         ),
     ]

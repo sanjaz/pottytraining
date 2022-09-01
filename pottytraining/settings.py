@@ -152,4 +152,4 @@ REST_FRAMEWORK = {
 #    'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
 # }
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = "users.User"

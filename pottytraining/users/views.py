@@ -4,10 +4,7 @@ from rest_framework import generics, viewsets
 
 from pottytraining.users.filters import UserFilter
 from pottytraining.users.permissions import IsAdmin
-from pottytraining.users.serializers import (
-    CreateUserSerializer,
-    UserSerializer
-)
+from pottytraining.users.serializers import CreateUserSerializer, UserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -34,9 +31,7 @@ class UserViewSet(viewsets.ModelViewSet):
         if self.group_name is None:
             return get_user_model().objects.all()
         else:
-            return get_user_model().objects.filter(
-                groups__name=self.group_name
-            )
+            return get_user_model().objects.filter(groups__name=self.group_name)
 
 
 class AdminViewSet(UserViewSet):

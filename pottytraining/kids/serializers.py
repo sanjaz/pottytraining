@@ -9,7 +9,7 @@ class KidSerializer(serializers.ModelSerializer):
         source="guardians",
         queryset=get_user_model().objects.filter(groups__name="Teachers"),
         many=True,
-        label="Teachers"
+        label="Teachers",
     )
 
     class Meta:

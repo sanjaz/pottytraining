@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_filters",
     "rest_framework",
+    "pottytraining.kids.apps.KidsConfig",
     "pottytraining.users.apps.UsersConfig",
 ]
 

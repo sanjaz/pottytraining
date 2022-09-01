@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
+from pottytraining.kids import urls as kids_urls
 from pottytraining.users import urls as users_urls
 
 
@@ -28,4 +29,5 @@ urlpatterns = [
         "api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"
     ),
     path("api/", include(users_urls)),
+    path("api/", include(kids_urls)),
 ]

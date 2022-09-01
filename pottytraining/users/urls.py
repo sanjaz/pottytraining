@@ -1,6 +1,6 @@
 from django.urls import include, path
 
-from pottytraining.users.routers import CustomRouter
+from pottytraining.routers import CustomRouter
 from pottytraining.users.views import (
     AdminViewSet,
     CreateUserView,

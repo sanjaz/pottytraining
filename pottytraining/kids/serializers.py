@@ -5,7 +5,8 @@ from pottytraining.kids.models import Kid
 
 
 class KidSerializer(serializers.ModelSerializer):
-    guardians = serializers.PrimaryKeyRelatedField(
+    teachers = serializers.PrimaryKeyRelatedField(
+        source="guardians",
         queryset=get_user_model().objects.filter(groups__name="Teachers"),
         many=True,
         label="Teachers"
@@ -13,4 +14,4 @@ class KidSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Kid
-        fields = '__all__'
+        exclude = ["guardians"]

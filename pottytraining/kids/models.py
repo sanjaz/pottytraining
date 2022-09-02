@@ -19,3 +19,14 @@ class Kid(models.Model):
 
     class Meta:
         ordering = ["last_name", "first_name"]
+
+    @property
+    def full_name(self) -> str:
+        """
+        Return the first_name plus the last_name, with a space in between.
+        """
+        full_name = "%s %s" % (self.first_name, self.last_name)
+        return full_name.strip()
+
+    def __str__(self) -> str:
+        return self.full_name

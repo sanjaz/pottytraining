@@ -1,10 +1,17 @@
 from django.contrib.auth import get_user_model
 from django_filters import rest_framework as filters
 from rest_framework import generics, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
+from pottytraining.kids.models import Kid
+from pottytraining.kids.serializers import KidSerializer
 from pottytraining.users.filters import UserFilter
-from pottytraining.users.permissions import IsAdmin
-from pottytraining.users.serializers import CreateUserSerializer, UserSerializer
+from pottytraining.users.permissions import IsAdmin, IsAdminOrTeacher
+from pottytraining.users.serializers import (
+    CreateUserSerializer,
+    UserSerializer,
+)
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -40,6 +47,15 @@ class AdminViewSet(UserViewSet):
 
 class TeacherViewSet(UserViewSet):
     group_name = "Teachers"
+
+    @action(detail=True,
+            url_path="kids",
+            url_name="teacher_kids",
+            permission_classes=[IsAdminOrTeacher])
+    def list_kids(self, request, pk=None):
+        kids = Kid.objects.filter(guardians__id=pk)
+        serializer = KidSerializer(kids, many=True)
+        return Response(serializer.data)
 
 
 class ParentViewSet(UserViewSet):

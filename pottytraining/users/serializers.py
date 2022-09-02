@@ -12,6 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = [
+            "id",
             "url",
             "username",
             "email",
@@ -30,6 +31,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
         model = get_user_model()
         fields = (
             "id",
+            "url",
             "username",
             "email",
             "password",

@@ -3,7 +3,6 @@ from django.urls import include, path
 from pottytraining.routers import CustomRouter
 from pottytraining.users.views import (
     AdminViewSet,
-    CreateUserView,
     ParentViewSet,
     TeacherViewSet,
     UserViewSet,
@@ -18,6 +17,5 @@ router.register(r"parents", ParentViewSet, basename="parents")
 
 
 urlpatterns = [
-    path("users/create/v1/", CreateUserView.as_view(), name="create_user"),
     path("", include(router.urls)),
 ]

@@ -30,3 +30,13 @@ class Kid(models.Model):
 
     def __str__(self) -> str:
         return self.full_name
+
+
+class PeeOrPoo(models.Model):
+    is_poo = models.BooleanField()
+    kid = models.ForeignKey(Kid, on_delete=models.CASCADE)
+    time = models.DateTimeField()
+    note = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ["kid__id", "time"]

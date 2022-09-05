@@ -34,7 +34,9 @@ class Kid(models.Model):
 
 class PeeOrPoo(models.Model):
     is_poo = models.BooleanField()
-    kid = models.ForeignKey(Kid, on_delete=models.CASCADE)
+    kid = models.ForeignKey(
+        Kid, on_delete=models.CASCADE, related_name='pee_or_poos'
+    )
     time = models.DateTimeField()
     note = models.TextField(blank=True)
 

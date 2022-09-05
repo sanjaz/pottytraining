@@ -1,8 +1,6 @@
 from pottytraining.kids.serializers import KidSerializer
 from django_filters import rest_framework as filters
 from rest_framework import viewsets
-from rest_framework.decorators import action
-from rest_framework.response import Response
 from rest_framework_extensions.mixins import NestedViewSetMixin
 
 from pottytraining.kids.filters import KidFilter

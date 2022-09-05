@@ -1,6 +1,7 @@
 from pottytraining.kids.serializers import KidSerializer
 from django_filters import rest_framework as filters
 from rest_framework import viewsets
+from rest_framework.response import Response
 from rest_framework_extensions.mixins import NestedViewSetMixin
 
 from pottytraining.kids.filters import KidFilter
@@ -18,3 +19,7 @@ class KidViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
 class PeeOrPooViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = PeeOrPoo.objects.all()
     serializer_class = PeeOrPooSerializer
+
+    def perform_create(self, serializer):
+        kid_id = serializer.context['view'].kwargs['parent_lookup_kid']
+        serializer.save(kid_id=kid_id)

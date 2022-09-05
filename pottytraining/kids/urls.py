@@ -8,7 +8,7 @@ router = NestedRouter()
 router.register(
     r'kids', KidViewSet, basename='kids'
 ).register(
-    r'pee-or-poos', PeeOrPooViewSet, basename='kid_pee_or_poos',
+    r'pee-or-poos', PeeOrPooViewSet, basename='pee_or_poos',
     parents_query_lookups=['kid']
 )
 

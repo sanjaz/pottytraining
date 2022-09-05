@@ -54,7 +54,9 @@ class TeacherViewSet(UserViewSet):
             permission_classes=[IsAdminOrTeacher])
     def list_kids(self, request, pk=None):
         kids = Kid.objects.filter(guardians__id=pk)
-        serializer = KidSerializer(kids, many=True)
+        serializer = KidSerializer(
+            kids, many=True, context={"request": request}
+        )
         return Response(serializer.data)
 
 

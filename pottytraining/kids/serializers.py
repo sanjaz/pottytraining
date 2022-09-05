@@ -11,6 +11,10 @@ class KidSerializer(serializers.ModelSerializer):
         many=True,
         label="Teachers",
     )
+    url = serializers.HyperlinkedIdentityField(
+        read_only=True,
+        view_name='kids-detail'
+    )
 
     class Meta:
         model = Kid

@@ -1,4 +1,5 @@
 from rest_framework.routers import DefaultRouter, DynamicRoute, Route
+from rest_framework_extensions.routers import NestedRouterMixin
 
 
 class CustomRouter(DefaultRouter):
@@ -49,3 +50,7 @@ class CustomRouter(DefaultRouter):
             initkwargs={},
         ),
     ]
+
+
+class NestedRouter(NestedRouterMixin, CustomRouter):
+    pass

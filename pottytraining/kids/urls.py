@@ -1,12 +1,16 @@
-from posixpath import basename
 from django.urls import include, path
 
-from pottytraining.kids.views import KidViewSet
-from pottytraining.routers import CustomRouter
+from pottytraining.kids.views import KidViewSet, PeeOrPooViewSet
+from pottytraining.routers import NestedRouter
 
 
-router = CustomRouter()
-router.register(r"kids", KidViewSet, basename="kids")
+router = NestedRouter()
+router.register(
+    r'kids', KidViewSet, basename='kids'
+).register(
+    r'pee-or-poos', PeeOrPooViewSet, basename='kid_pee_or_poos',
+    parents_query_lookups=['kid']
+)
 
 
 urlpatterns = [

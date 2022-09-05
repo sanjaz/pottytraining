@@ -8,7 +8,7 @@ class PeeOrPooSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PeeOrPoo
-        fields = ["id", "is_poo", "time", "note"]
+        fields = ["id", "is_poo", "time", "note", "kid"]
 
 
 class KidSerializer(serializers.ModelSerializer):

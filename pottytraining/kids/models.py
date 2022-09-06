@@ -42,3 +42,6 @@ class PeeOrPoo(models.Model):
 
     class Meta:
         ordering = ["kid__id", "time"]
+
+    def __str__(self) -> str:
+        return "%s %s" % (str(self.kid), self.time)

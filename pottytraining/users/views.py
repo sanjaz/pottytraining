@@ -48,10 +48,12 @@ class AdminViewSet(UserViewSet):
 class TeacherViewSet(UserViewSet):
     group_name = "Teachers"
 
-    @action(detail=True,
-            url_path="kids",
-            url_name="teacher_kids",
-            permission_classes=[IsAdminOrTeacher])
+    @action(
+        detail=True,
+        url_path="kids",
+        url_name="teacher_kids",
+        permission_classes=[IsAdminOrTeacher],
+    )
     def list_kids(self, request, pk=None):
         kids = Kid.objects.filter(guardians__id=pk)
         serializer = KidSerializer(

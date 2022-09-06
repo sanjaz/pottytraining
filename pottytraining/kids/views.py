@@ -21,5 +21,5 @@ class PeeOrPooViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     serializer_class = PeeOrPooSerializer
 
     def perform_create(self, serializer):
-        kid_id = serializer.context['view'].kwargs['parent_lookup_kid']
+        kid_id = serializer.context["view"].kwargs["parent_lookup_kid"]
         serializer.save(kid_id=kid_id)

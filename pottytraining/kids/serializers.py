@@ -6,19 +6,15 @@ from pottytraining.kids.models import Kid, PeeOrPoo
 
 
 class PeeOrPooHyperlink(serializers.HyperlinkedIdentityField):
-
     def get_url(self, obj, view_name, request, format):
-        url_kwargs = {
-            'parent_lookup_kid': obj.kid.id,
-            'pk': obj.pk
-        }
+        url_kwargs = {"parent_lookup_kid": obj.kid.id, "pk": obj.pk}
         return reverse(
             view_name, kwargs=url_kwargs, request=request, format=format
         )
 
 
 class PeeOrPooSerializer(serializers.ModelSerializer):
-    url = PeeOrPooHyperlink(read_only=True, view_name='pee_or_poos-detail')
+    url = PeeOrPooHyperlink(read_only=True, view_name="pee_or_poos-detail")
 
     class Meta:
         model = PeeOrPoo
@@ -33,14 +29,10 @@ class KidSerializer(serializers.ModelSerializer):
         label="Teachers",
     )
     url = serializers.HyperlinkedIdentityField(
-        read_only=True,
-        view_name='kids-detail'
+        read_only=True, view_name="kids-detail"
     )
     pee_or_poos = PeeOrPooSerializer(many=True, read_only=True)
 
     class Meta:
         model = Kid
         exclude = ["guardians"]
-
-
-

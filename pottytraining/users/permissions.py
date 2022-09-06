@@ -23,3 +23,10 @@ class IsAdminOrTeacher(permissions.BasePermission):
             request.user.is_authenticated
             and request.user.is_admin_or_teacher()
         )
+
+
+class IsTeacherOfAKid(permissions.BasePermission):
+    """Allows access only to kid's teachers."""
+
+    def has_object_permission(self, request, view, obj):
+        return obj.kid.guardians.filter(id=request.user.id).exists()

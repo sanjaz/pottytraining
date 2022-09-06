@@ -49,6 +49,7 @@ class AdminViewSet(UserViewSet):
 
 class TeacherViewSet(UserViewSet):
     group_name = "Teachers"
+    permission_classes = [IsAdminOrTeacher]
 
     @action(
         detail=True,

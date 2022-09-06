@@ -38,7 +38,9 @@ class UserViewSet(viewsets.ModelViewSet):
         if self.group_name is None:
             return get_user_model().objects.all()
         else:
-            return get_user_model().objects.filter(groups__name=self.group_name)
+            return get_user_model().objects.filter(
+                groups__name=self.group_name
+            )
 
 
 class AdminViewSet(UserViewSet):

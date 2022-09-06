@@ -8,7 +8,6 @@ from pottytraining.users.views import (
     UserViewSet,
 )
 
-
 router = CustomRouter()
 router.register(r"users", UserViewSet)
 router.register(r"admins", AdminViewSet, basename="admins")
